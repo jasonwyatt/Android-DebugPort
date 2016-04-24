@@ -54,7 +54,20 @@ Once started, you should see in the logs some information about where you can po
     BeanShell 1.3.0 - by Pat Niemeyer (pat@pat.net)
     bsh %
 
-There are a few built in commands, to see what they are, run `help();`.  
+There are a few built in commands, to see what they are, run `help();`
+  
+    bsh % help();
+    Available Commands:
+      exit()                Exit this interpreter
+      help()                Show this help message.
+      methods(Class)        Get the available methods for the provided class.
+      methods(Object)       Get the available methods for the provided object.
+      methodsLocal(Class)   Show all of the locally-declared methods for the provided
+                            class.
+      methodsLocal(Object)  Show all of the locally-declared methods for the provided
+                            object.
+    
+    bsh %
 
 Also, your application variable is automatically included as a global variable in the interpreter. It's called `app`. Try running `methodsLocal(app);`:
 

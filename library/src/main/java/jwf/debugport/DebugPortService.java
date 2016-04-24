@@ -21,6 +21,13 @@ public class DebugPortService extends Service {
     private Params mParams;
 
     /**
+     * Utility method to start the DebugPortService
+     */
+    public static void start(Context context) {
+        start(context, new Params());
+    }
+
+    /**
      * Utility method to start the DebugPortService.
      * @param params Parameters to configure the service.
      */
@@ -32,7 +39,7 @@ public class DebugPortService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Params params = (Params) intent.getParcelableExtra(INTENT_EXTRA_PARAMS);
+        Params params = intent.getParcelableExtra(INTENT_EXTRA_PARAMS);
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DebugPortWakeLock");

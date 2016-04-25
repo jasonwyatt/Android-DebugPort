@@ -1,5 +1,7 @@
 # Android DebugPort
 
+Android DebugPort allows you to write and execute code whithin your app's context, at runtime, and from the comfort of your desktop computer's terminal.  Think of it as a window into your application through which you can both inspect _and_ modify its state.
+
 ## Getting Started
 
 ### Configure Your Dependencies
@@ -76,6 +78,8 @@ Also, your application variable is automatically included as a global variable i
       onCreate()
     }
     bsh %
+
+Don't forget! You can execute whatever code you wish within the DebugPort. See the [beanshell documentation](http://beanshell.org/manual/contents.html) for the full rundown.
 
 You can exit at any time by running the `exit();` command.
 

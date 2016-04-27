@@ -85,7 +85,7 @@ public class TelnetServer implements Runnable {
             }
 
             synchronized (mLock) {
-                clientConn = new ClientConnection(mApp, client, this);
+                clientConn = new ClientConnection(mApp, client, this, mParams.getStartupCommands());
                 mClients.add(clientConn);
             }
             new Thread(clientConn).start();

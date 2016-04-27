@@ -19,12 +19,14 @@ class ClientConnection implements Runnable, Commands.ExitListener {
     private final Socket mClient;
     private final WeakReference<TelnetServer> mParent;
     private final Application mApp;
+    private final String[] mStartupCommands;
     private TelnetConsoleInterface mConsole;
 
-    public ClientConnection(Context context, Socket client, TelnetServer parent) {
+    public ClientConnection(Context context, Socket client, TelnetServer parent, String[] startupCommands) {
         mApp = (Application) context.getApplicationContext();
         mClient = client;
         mParent = new WeakReference<>(parent);
+        mStartupCommands = startupCommands;
     }
 
     public void close() {
@@ -49,6 +51,11 @@ class ClientConnection implements Runnable, Commands.ExitListener {
             interpreter.set("cmd", new Commands(this));
             interpreter.set("app", mApp);
             interpreter.eval("importCommands(\"jwf.debugport.commands\")");
+
+            for (String startupCommand : mStartupCommands) {
+                interpreter.eval(startupCommand);
+            }
+
             interpreter.setExitOnEOF(false);
             interpreter.run();
         } catch (Exception e) {

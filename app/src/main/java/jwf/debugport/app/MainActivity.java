@@ -37,7 +37,12 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         TextView status = (TextView) findViewById(R.id.server_status);
         if (isChecked) {
-            Params params = new Params();
+            Params params = new Params()
+                    .setStartupCommands(new String[]{
+                            "import android.os.*;",
+                            "import java.util.*;",
+                            "x = 1+1;",
+                    });
             DebugPortService.start(this, params);
             if (status != null) {
                 status.setText(getString(R.string.server_status, getIpAddress(), params.getPort()));

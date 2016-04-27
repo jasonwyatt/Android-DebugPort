@@ -71,12 +71,16 @@ public class TelnetServer implements Runnable {
             Socket client;
             ClientConnection clientConn = null;
             if (mServerSocket == null) {
-                continue;
+                break;
             }
             try {
                 client = mServerSocket.accept();
             } catch (IOException e) {
-                Log.e(TAG, "An error occurred accepting a client connection.", e);
+                if (e.getMessage().equals("Socket closed")) {
+                    // no big deal, we are done here..
+                    break;
+                }
+                Log.w(TAG, "An error occurred accepting a client connection.", e);
                 continue;
             }
 

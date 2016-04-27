@@ -37,6 +37,14 @@ public class DebugPortService extends Service {
         context.startService(intent);
     }
 
+    /**
+     * Kill the currently-running server.
+     */
+    public static void stop(Context context) {
+        Intent intent = new Intent(context, DebugPortService.class);
+        context.stopService(intent);
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Params params = intent.getParcelableExtra(INTENT_EXTRA_PARAMS);

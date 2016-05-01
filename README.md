@@ -61,6 +61,11 @@ There are a few built in commands, to see what they are, run `help();`
     bsh % help();
     Available Commands:
       exit()                Exit this interpreter
+      fields(Class)         List all of the fields available for a particular class.
+      fields(Object)        List all of the fields available for a particular object.
+      fieldsLocal(Class)    List all of the fields defined locally for a particular
+                            class.
+      fieldsLocal(Object)   List all of the fields defined locally for an object.
       help()                Show this help message.
       methods(Class)        Get the available methods for the provided class.
       methods(Object)       Get the available methods for the provided object.
@@ -75,7 +80,7 @@ Also, your application variable is automatically included as a global variable i
 
     bsh % methodsLocal(app);
     declared methods: {
-      onCreate()
+      public void onCreate()
     }
     bsh %
 

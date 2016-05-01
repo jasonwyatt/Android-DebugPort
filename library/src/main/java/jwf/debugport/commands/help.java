@@ -59,9 +59,8 @@ public class help {
         public int getMaxSignatureLength() {
             Method[] methods = mCommandClass.getMethods();
             int maxLength = 0;
-            for (int i = 0; i < methods.length; i++) {
-                Method method = methods[i];
-                if (method.getName() != "invoke") {
+            for (Method method : methods) {
+                if (!"invoke".equals(method.getName())) {
                     continue;
                 }
 
@@ -103,9 +102,8 @@ public class help {
         private void appendHelpInfo(StringBuilder target, int nameStartCol, int helpStartCol, int maxCols) {
             Method[] methods = mCommandClass.getMethods();
             boolean isFirst = true;
-            for (int i = 0; i < methods.length; i++) {
-                Method method = methods[i];
-                if (!method.getName().equals("invoke")){
+            for (Method method : methods) {
+                if (!method.getName().equals("invoke")) {
                     continue;
                 }
 
@@ -146,6 +144,7 @@ public class help {
             }
         }
 
+        @SuppressWarnings("NullableProblems")
         @Override
         public int compareTo(CommandHelpInfo another) {
             if (another == null) {

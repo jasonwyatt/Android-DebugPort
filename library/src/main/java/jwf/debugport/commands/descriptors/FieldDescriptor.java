@@ -33,7 +33,7 @@ public class FieldDescriptor extends MemberDescriptor {
         try {
             Type genericType = mField.getGenericType();
             if (genericType instanceof ParameterizedType) {
-                sb.append(getParameterizedTypeString((ParameterizedType) genericType));
+                sb.append(getParametrizedTypeString((ParameterizedType) genericType));
             }
         } catch (Exception e) {
             // nothing to do here.

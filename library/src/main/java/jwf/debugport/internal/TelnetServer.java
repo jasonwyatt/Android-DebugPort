@@ -69,7 +69,7 @@ public class TelnetServer implements Runnable {
         Log.i(TAG, "Server running at "+ Utils.getIpAddress(mApp)+":"+mParams.getPort());
         while (mAlive) {
             Socket client;
-            ClientConnection clientConn = null;
+            ClientConnection clientConn;
             if (mServerSocket == null) {
                 break;
             }

@@ -26,9 +26,9 @@ public class fieldsLocal {
 
         sb.append("declared fields {\n");
 
-        for (int i = 0; i < fields.length; i++) {
+        for (FieldDescriptor field : fields) {
             sb.append(CommandUtils.indent(1));
-            sb.append(fields[i].toString());
+            sb.append(field.toString());
             sb.append("\n");
         }
 

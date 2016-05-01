@@ -9,7 +9,7 @@ public final class Commands {
     private final WeakReference<ExitListener> mListener;
 
     static {
-        // helper block to inititalize all the commands... TODO: maybe a better way to do this?
+        // helper block to initialize all the commands... TODO: maybe a better way to do this?
         help.registerCommand(help.class);
         help.registerCommand(exit.class);
         help.registerCommand(methods.class);

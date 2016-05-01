@@ -8,7 +8,7 @@ import android.net.wifi.WifiManager;
 /**
  *
  */
-class Utils {
+public class Utils {
     @SuppressLint("DefaultLocale")
     public static String getIpAddress(Context context) {
         WifiManager wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);

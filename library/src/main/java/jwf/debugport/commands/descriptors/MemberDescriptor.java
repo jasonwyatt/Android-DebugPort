@@ -49,8 +49,12 @@ public class MemberDescriptor implements Comparable<MemberDescriptor> {
         return 0;
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public int compareTo(MemberDescriptor another) {
+        if (another == null) {
+            return -1;
+        }
         // first sort by staticness...
         if (!Modifier.isStatic(mModifiers) && Modifier.isStatic(another.mModifiers)) {
             return -1;
@@ -68,7 +72,7 @@ public class MemberDescriptor implements Comparable<MemberDescriptor> {
         return mName.compareTo(another.mName);
     }
 
-    public static String getParameterizedTypeString(ParameterizedType type) {
+    public static String getParametrizedTypeString(ParameterizedType type) {
         StringBuilder sb = new StringBuilder();
         Type[] typeArgs = type.getActualTypeArguments();
         sb.append("<");

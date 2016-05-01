@@ -1,37 +1,41 @@
 package jwf.debugport.commands;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 import bsh.CallStack;
 import bsh.Interpreter;
 import jwf.debugport.annotations.Command;
-import jwf.debugport.commands.descriptors.MethodDescriptor;
+import jwf.debugport.commands.descriptors.FieldDescriptor;
 
 /**
  *
  */
 @Command
-public class methodsLocal {
-    @Command.Help("Show all of the locally-declared methods for the provided object.")
+public class fields {
+    @Command.Help("List all of the fields available for a particular object.")
     public static void invoke(Interpreter interpreter, CallStack callStack, Object obj) {
         invoke(interpreter, callStack, obj.getClass());
     }
 
-    @Command.Help("Show all of the locally-declared methods for the provided class.")
+    @Command.Help("List all of the fields available for a particular class.")
     public static void invoke(Interpreter interpreter, CallStack callStack, Class klass) {
         if (klass == null) {
             interpreter.println("value is null");
             return;
         }
-        MethodDescriptor[] methods = MethodDescriptor.fromMethods(klass.getDeclaredMethods());
+        FieldDescriptor[] fields = FieldDescriptor.fromFields(klass.getFields());
         StringBuilder sb = new StringBuilder();
 
-        sb.append("declared methods: {\n");
-        for (MethodDescriptor method : methods) {
+        sb.append("fields {\n");
+
+        for (int i = 0; i < fields.length; i++) {
             sb.append(CommandUtils.indent(1));
-            sb.append(method.toString());
+            sb.append(fields[i].toString());
             sb.append("\n");
         }
+
         sb.append("}");
 
         interpreter.println(sb.toString());

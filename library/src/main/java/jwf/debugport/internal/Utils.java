@@ -5,6 +5,8 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
+import java.util.Collection;
+
 /**
  *
  */

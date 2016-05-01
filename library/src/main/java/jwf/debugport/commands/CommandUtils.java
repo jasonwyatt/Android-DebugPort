@@ -1,5 +1,8 @@
 package jwf.debugport.commands;
 
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Member;
+
 /**
  *
  */

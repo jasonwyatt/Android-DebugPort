@@ -2,9 +2,7 @@ package jwf.debugport.commands.descriptors;
 
 import android.text.TextUtils;
 
-import java.lang.reflect.Member;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 

@@ -1,7 +1,5 @@
 package jwf.debugport.commands;
 
-import java.lang.reflect.Method;
-
 import bsh.CallStack;
 import bsh.Interpreter;
 import jwf.debugport.annotations.Command;

@@ -1,6 +1,6 @@
 # Android DebugPort
 
-Android DebugPort allows you to write and execute code whithin your app's context, at runtime, and from the comfort of your desktop computer's terminal.  Think of it as a window into your application through which you can both inspect _and_ modify its state.
+Android DebugPort allows you to write and execute code within your app's context, at runtime, and from the comfort of your computer's terminal. Think of it as a window into your application through which you can both inspect _and_ modify its state.
 
 ## Getting Started
 
@@ -15,13 +15,13 @@ Add the jitpack.io repository to your root `build.gradle`:
         }
     }
 
-In your application's `build.gradle`, add a dependency for Android DebugPort:
+In your application's `build.gradle` file, add a dependency for Android DebugPort:
 
     compile 'com.github.jasonwyatt:Android-DebugPort:0.3'
     
 ### Modify Your Manifest
 
-You'll need to make sure the following permissions are configured in your app's `ApplicationManifest.xml`
+You'll need to make sure the following permissions are configured in your app's `ApplicationManifest.xml`:
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -39,7 +39,7 @@ Also, you need to declare the `DebugPortService` as a `<service>` in the manifes
     
 ### Running the Server
 
-Starting the DebugPort server is easy!
+Starting the DebugPort server is easy! Simple call the start method:
 
     DebugPortService.start(context);
 
@@ -84,9 +84,12 @@ Also, your application variable is automatically included as a global variable i
     }
     bsh %
 
-Don't forget! You can execute whatever code you wish within the DebugPort. See the [beanshell documentation](http://beanshell.org/manual/contents.html) for the full rundown.
+Don't forget that you can execute whatever code you wish within the DebugPort. See the [beanshell documentation](http://beanshell.org/manual/contents.html) for the full rundown.
 
 You can exit at any time by running the `exit();` command.
+
+## License
+This library is released under the [Apache 2.0 License](https://github.com/jasonwyatt/Android-DebugPort/blob/master/LICENCE).
 
 # Open Source Disclaimers
 

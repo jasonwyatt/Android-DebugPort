@@ -17,7 +17,7 @@ Add the jitpack.io repository to your root `build.gradle`:
 
 In your application's `build.gradle` file, add a dependency for Android DebugPort:
 
-    compile 'com.github.jasonwyatt:Android-DebugPort:0.3'
+    compile 'com.github.jasonwyatt:Android-DebugPort:0.3.1'
     
 ### Modify Your Manifest
 

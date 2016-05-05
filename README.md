@@ -39,7 +39,7 @@ Also, you need to declare the `DebugPortService` as a `<service>` in the manifes
     
 ### Running the Server
 
-Starting the DebugPort server is easy! Simple call the start method:
+Starting the DebugPort server is easy! Simply call the start method:
 
     DebugPortService.start(context);
 

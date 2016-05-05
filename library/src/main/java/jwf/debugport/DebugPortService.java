@@ -22,7 +22,7 @@ public class DebugPortService extends Service {
     private static final String INTENT_EXTRA_PARAMS = "jwf.debugport.PARAMS";
     private static final String ACTION_STOP = "jwf.debugport.ACTION_STOP";
     private static final int STOP_REQUEST_CODE = 0;
-    private static final int NOTIFICATION_ID = 0;
+    private static final int NOTIFICATION_ID = R.id.debugport_notification_id;
     private int mPort;
     private TelnetServer mServer;
     private PowerManager.WakeLock mWakeLock;

@@ -46,18 +46,18 @@ class TelnetConsoleInterface implements ConsoleInterface, Closeable {
     }
 
     @Override
-    public void println(String s) {
-        getOut().println(s);
+    public void println(Object o) {
+        getOut().println(o == null ? "null" : o.toString());
     }
 
     @Override
-    public void print(String s) {
-        getOut().print(s);
+    public void print(Object o) {
+        getOut().print(o == null ? "null" : o.toString());
     }
 
     @Override
-    public void error(String s) {
-        getOut().print(s);
+    public void error(Object o) {
+        getErr().print(o == null ? "null" : o.toString());
     }
 
     @Override

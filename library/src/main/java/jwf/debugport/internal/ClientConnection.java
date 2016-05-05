@@ -48,6 +48,7 @@ class ClientConnection implements Runnable, Commands.ExitListener {
         try {
             mConsole = new TelnetConsoleInterface(mClient.getInputStream(), mClient.getOutputStream());
             Interpreter interpreter = new Interpreter(mConsole);
+            interpreter.setShowResults(true);
             interpreter.set("cmd", new Commands(this));
             interpreter.set("app", mApp);
             interpreter.eval("importCommands(\"jwf.debugport.commands\")");

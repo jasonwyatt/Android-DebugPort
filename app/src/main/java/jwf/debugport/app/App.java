@@ -20,6 +20,8 @@ public class App extends Application {
     public short[] mShortArray;
     public byte[] mByteArray;
     public long[] mLongArray;
+    private String mSecretString = "This is a private value.";
+    private int mSecretInt = 42;
 
     @Override
     public void onCreate() {

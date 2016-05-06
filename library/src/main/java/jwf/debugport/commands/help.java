@@ -16,7 +16,7 @@ import jwf.debugport.annotations.Command;
 public class help {
     private static final ArrayList<CommandHelpInfo> sCommandHelp = new ArrayList<>();
     private static final int GAP_SPACES = 2;
-    private static final int MAX_WIDTH = 80;
+    private static final int MAX_WIDTH = 100;
 
     @Command.Help("Show this help message.")
     public static void invoke(Interpreter interpreter, CallStack callStack) {

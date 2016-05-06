@@ -10,39 +10,46 @@ Android DebugPort allows you to write and execute code within your app's context
 
 Add the jitpack.io repository to your root `build.gradle`:
 
-    allprojects {
-        repositories {
-            jcenter()
-            maven { url "https://jitpack.io" }
-        }
+```groovy
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
+}
+```
 
 In your application's `build.gradle` file, add a dependency for Android DebugPort:
 
-    debugCompile 'com.github.jasonwyatt:Android-DebugPort:0.3.1'
-    testCompile 'com.github.jasonwyatt:Android-DebugPort:0.3.1'
-    releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:0.3.1'
-    
+```groovy
+debugCompile 'com.github.jasonwyatt:Android-DebugPort:0.3.1'
+testCompile 'com.github.jasonwyatt:Android-DebugPort:0.3.1'
+releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:0.3.1'
+```
+
 **Note:** The final line above will use a [no-op version of the DebugPort library](https://github.com/jasonwyatt/Android-DebugPort-NOOP) in production builds. This makes it impossible for people to run the DebugPort server on a production build.
     
 ### Modify Your Manifest
 
 You'll need to make sure the following permissions are configured in your app's `ApplicationManifest.xml`:
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+```
+
 Also, you need to declare the `DebugPortService` as a `<service>` in the manifest's `<application>` element:
 
-    <application
-        ...
-        >
-        
-        <!-- Your App's stuff... -->
-
-        <service android:name="jwf.debugport.DebugPortService" android:exported="false" />
-    </application>
+```xml
+<application
+    ...
+    >
     
+    <!-- Your App's stuff... -->
+    <service android:name="jwf.debugport.DebugPortService" android:exported="false" />
+</application>
+```
+
 ### Running the Server
 
 Starting the DebugPort server is easy! Simply call the start method:

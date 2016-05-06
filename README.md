@@ -22,9 +22,9 @@ allprojects {
 In your application's `build.gradle` file, add a dependency for Android DebugPort:
 
 ```groovy
-debugCompile 'com.github.jasonwyatt:Android-DebugPort:0.4'
-testCompile 'com.github.jasonwyatt:Android-DebugPort:0.4'
-releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:0.4'
+debugCompile 'com.github.jasonwyatt:Android-DebugPort:0.5'
+testCompile 'com.github.jasonwyatt:Android-DebugPort:0.5'
+releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:0.5'
 ```
 
 **Note:** The final line above will use a [no-op version of the DebugPort library](https://github.com/jasonwyatt/Android-DebugPort-NOOP) in production builds. This makes it impossible for people to run the DebugPort server on a production build.
@@ -66,26 +66,39 @@ Once started, you should see in the logs some information about where you can po
     Trying 192.168.2.83...
     Connected to 192.168.2.83.
     Escape character is '^]'.
-    BeanShell 2.0b5 - by Pat Niemeyer (pat@pat.net)
+    BeanShell 2.0b6 - by Pat Niemeyer (pat@pat.net)
     bsh %
 
 There are a few built in commands, to see what they are, run `help();`
   
     bsh % help();
     Available Commands:
-      exit()                Exit this interpreter
-      fields(Class)         List all of the fields available for a particular class.
-      fields(Object)        List all of the fields available for a particular object.
-      fieldsLocal(Class)    List all of the fields defined locally for a particular
-                            class.
-      fieldsLocal(Object)   List all of the fields defined locally for an object.
-      help()                Show this help message.
-      methods(Class)        Get the available methods for the provided class.
-      methods(Object)       Get the available methods for the provided object.
-      methodsLocal(Class)   Show all of the locally-declared methods for the provided
-                            class.
-      methodsLocal(Object)  Show all of the locally-declared methods for the provided
-                            object.
+      call(Object obj, String method, Object... params)
+          Call a method, regardless of access modifiers, on the provided object.
+      exit()
+          Exit this interpreter
+      fields(Class class)
+          List all of the fields available for a particular class.
+      fields(Object obj)
+          List all of the fields available for a particular object.
+      fieldsLocal(Class class)
+          List all of the fields defined locally for a particular class.
+      fieldsLocal(Object obj)
+          List all of the fields defined locally for an object.
+      get(Object obj, String fieldName)
+          Get the value of a field, regardless of access modifiers, on the provided object.
+      help()
+          Show this help message.
+      methods(Class class)
+          Get the available methods for the provided class.
+      methods(Object obj)
+          Get the available methods for the provided object.
+      methodsLocal(Class class)
+          Show all of the locally-declared methods for the provided class.
+      methodsLocal(Object obj)
+          Show all of the locally-declared methods for the provided object.
+      set(Object obj, String fieldName, Object value)
+          Set the value of a field on the provided object to the given value, regardless of access modifiers.
     
     bsh %
 

@@ -72,7 +72,7 @@ public class DebugPortService extends Service {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                     Context context = DebugPortService.this;
                     Notification.Builder builder = new Notification.Builder(DebugPortService.this);
-                    builder.setSmallIcon(R.drawable.ic_notification);
+                    builder.setSmallIcon(R.drawable.debugport_ic_notification);
                     builder.setContentTitle(getString(R.string.notification_title));
                     builder.setContentText(getString(R.string.notification_subtitle, Utils.getIpAddress(context), params.getPort()));
 

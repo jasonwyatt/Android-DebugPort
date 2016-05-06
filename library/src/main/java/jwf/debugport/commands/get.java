@@ -7,12 +7,16 @@ import bsh.Interpreter;
 import jwf.debugport.annotations.Command;
 
 /**
- * Created by jason on 5/6/16.
+ *
  */
 @Command
 public class get {
-    @Command.Help("Get the value of a parameter, regardless of access modifiers, on the provided object.")
-    public static Object invoke(Interpreter interpreter, CallStack callstack, Object object, String param) throws NoSuchFieldException, IllegalAccessException {
+    @Command.Help("Get the value of a field, regardless of access modifiers, on the provided object.")
+    public static Object invoke(
+            Interpreter interpreter,
+            CallStack callstack,
+            @Command.ParamName("obj") Object object,
+            @Command.ParamName("fieldName") String param) throws NoSuchFieldException, IllegalAccessException {
         Field field;
         try {
             field = object.getClass().getDeclaredField(param);

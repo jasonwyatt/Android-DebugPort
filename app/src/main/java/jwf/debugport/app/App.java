@@ -44,4 +44,8 @@ public class App extends Application {
     public void setIntArray(int[] arry) {
         mIntArray = arry;
     }
+
+    public void setIntArrayVarArg(int... arr) {
+        mIntArray = arr;
+    }
 }

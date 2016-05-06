@@ -11,12 +11,12 @@ import jwf.debugport.commands.descriptors.MethodDescriptor;
 @Command
 public class methodsLocal {
     @Command.Help("Show all of the locally-declared methods for the provided object.")
-    public static void invoke(Interpreter interpreter, CallStack callStack, Object obj) {
+    public static void invoke(Interpreter interpreter, CallStack callStack, @Command.ParamName("obj") Object obj) {
         invoke(interpreter, callStack, obj.getClass());
     }
 
     @Command.Help("Show all of the locally-declared methods for the provided class.")
-    public static void invoke(Interpreter interpreter, CallStack callStack, Class klass) {
+    public static void invoke(Interpreter interpreter, CallStack callStack, @Command.ParamName("class") Class klass) {
         if (klass == null) {
             interpreter.println("value is null");
             return;

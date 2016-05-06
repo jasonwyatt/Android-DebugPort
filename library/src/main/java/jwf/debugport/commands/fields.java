@@ -11,12 +11,12 @@ import jwf.debugport.commands.descriptors.FieldDescriptor;
 @Command
 public class fields {
     @Command.Help("List all of the fields available for a particular object.")
-    public static void invoke(Interpreter interpreter, CallStack callStack, Object obj) {
+    public static void invoke(Interpreter interpreter, CallStack callStack, @Command.ParamName("obj") Object obj) {
         invoke(interpreter, callStack, obj.getClass());
     }
 
     @Command.Help("List all of the fields available for a particular class.")
-    public static void invoke(Interpreter interpreter, CallStack callStack, Class klass) {
+    public static void invoke(Interpreter interpreter, CallStack callStack, @Command.ParamName("class") Class klass) {
         if (klass == null) {
             interpreter.println("value is null");
             return;

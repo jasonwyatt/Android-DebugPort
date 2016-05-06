@@ -17,4 +17,10 @@ public @interface Command {
     @interface Help {
         String value() default "";
     }
+
+    @Target(ElementType.PARAMETER)
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface ParamName {
+        String value() default "";
+    }
 }

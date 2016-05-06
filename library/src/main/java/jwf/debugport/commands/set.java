@@ -7,12 +7,17 @@ import bsh.Interpreter;
 import jwf.debugport.annotations.Command;
 
 /**
- * Created by jason on 5/6/16.
+ *
  */
 @Command
 public class set {
     @Command.Help("Set the value of a field on the provided object to the given value, regardless of access modifiers.")
-    public static Object invoke(Interpreter interpreter, CallStack callStack, Object object, String param, Object value) throws NoSuchFieldException, IllegalAccessException {
+    public static Object invoke(
+            Interpreter interpreter,
+            CallStack callStack,
+            @Command.ParamName("obj") Object object,
+            @Command.ParamName("fieldName") String param,
+            @Command.ParamName("value") Object value) throws NoSuchFieldException, IllegalAccessException {
         Field field;
         try {
             field = object.getClass().getDeclaredField(param);

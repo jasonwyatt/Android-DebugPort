@@ -44,13 +44,21 @@ public class MethodDescriptor extends MemberDescriptor {
         sb.append(getName());
         sb.append("(");
         try {
+            Class<?>[] params = mMethod.getParameterTypes();
             Type[] genericParams = mMethod.getGenericParameterTypes();
             for (int i = 0; i < genericParams.length; i++) {
                 if (i != 0) {
                     sb.append(", ");
                 }
                 Type paramType = genericParams[i];
-                sb.append(getSimpleClassName(paramType));
+
+                String name = getSimpleClassName(paramType);
+                if (i == genericParams.length-1 && mMethod.isVarArgs() && params[i].isArray()) {
+                    sb.append(name.replace("[]", ""));
+                    sb.append("...");
+                } else {
+                    sb.append(name);
+                }
             }
         } catch (Exception e) {
             Class<?>[] params = mMethod.getParameterTypes();
@@ -58,7 +66,13 @@ public class MethodDescriptor extends MemberDescriptor {
                 if (i != 0) {
                     sb.append(", ");
                 }
-                sb.append(params[i].getSimpleName());
+                String name = params[i].getSimpleName();
+                if (i == params.length-1 && mMethod.isVarArgs() && params[i].isArray()) {
+                    sb.append(name.replace("[]", ""));
+                    sb.append("...");
+                } else {
+                    sb.append(name);
+                }
             }
         }
         sb.append(")");

@@ -11,12 +11,12 @@ import jwf.debugport.commands.descriptors.FieldDescriptor;
 @Command
 public class fieldsLocal {
     @Command.Help("List all of the fields defined locally for an object.")
-    public static void invoke(Interpreter interpreter, CallStack callStack, Object obj) {
+    public static void invoke(Interpreter interpreter, CallStack callStack, @Command.ParamName("obj") Object obj) {
         invoke(interpreter, callStack, obj.getClass());
     }
 
     @Command.Help("List all of the fields defined locally for a particular class.")
-    public static void invoke(Interpreter interpreter, CallStack callStack, Class klass) {
+    public static void invoke(Interpreter interpreter, CallStack callStack, @Command.ParamName("class") Class klass) {
         if (klass == null) {
             interpreter.println("null");
             return;

@@ -22,9 +22,9 @@ allprojects {
 In your application's `build.gradle` file, add a dependency for Android DebugPort:
 
 ```groovy
-debugCompile 'com.github.jasonwyatt:Android-DebugPort:0.3.1'
-testCompile 'com.github.jasonwyatt:Android-DebugPort:0.3.1'
-releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:0.3.1'
+debugCompile 'com.github.jasonwyatt:Android-DebugPort:0.4'
+testCompile 'com.github.jasonwyatt:Android-DebugPort:0.4'
+releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:0.4'
 ```
 
 **Note:** The final line above will use a [no-op version of the DebugPort library](https://github.com/jasonwyatt/Android-DebugPort-NOOP) in production builds. This makes it impossible for people to run the DebugPort server on a production build.
@@ -66,7 +66,7 @@ Once started, you should see in the logs some information about where you can po
     Trying 192.168.2.83...
     Connected to 192.168.2.83.
     Escape character is '^]'.
-    BeanShell 1.3.0 - by Pat Niemeyer (pat@pat.net)
+    BeanShell 2.0b5 - by Pat Niemeyer (pat@pat.net)
     bsh %
 
 There are a few built in commands, to see what they are, run `help();`

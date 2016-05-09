@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        TextView status = (TextView) findViewById(R.id.server_status);
+        TextView debugStatus = (TextView) findViewById(R.id.debug_server_status);
+        TextView sqliteStatus = (TextView) findViewById(R.id.sqlite_server_status);
         if (isChecked) {
             Params params = new Params()
                     .setStartupCommands(new String[]{
@@ -44,14 +44,21 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                             "x = 1+1;",
                     });
             DebugPortService.start(this, params);
-            if (status != null) {
-                status.setText(getString(R.string.server_status, getIpAddress(), params.getPort()));
-                status.setVisibility(View.VISIBLE);
+            if (debugStatus != null) {
+                debugStatus.setText(getString(R.string.debug_server_status, getIpAddress(), params.getDebugPort()));
+                debugStatus.setVisibility(View.VISIBLE);
+            }
+            if (sqliteStatus != null) {
+                sqliteStatus.setText(getString(R.string.sqlite_server_status, getIpAddress(), params.getSQLitePort()));
+                sqliteStatus.setVisibility(View.VISIBLE);
             }
         } else {
             DebugPortService.stop(this);
-            if (status != null) {
-                status.setVisibility(View.GONE);
+            if (debugStatus != null) {
+                debugStatus.setVisibility(View.GONE);
+            }
+            if (sqliteStatus != null) {
+                sqliteStatus.setVisibility(View.GONE);
             }
         }
     }

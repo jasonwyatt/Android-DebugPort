@@ -1,4 +1,4 @@
-package jwf.debugport.internal;
+package jwf.debugport.internal.debug;
 
 import java.io.Closeable;
 import java.io.IOException;

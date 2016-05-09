@@ -1,4 +1,4 @@
-package jwf.debugport.commands;
+package jwf.debugport.internal.debug.commands;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

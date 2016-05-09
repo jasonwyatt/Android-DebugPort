@@ -7,28 +7,65 @@ import android.os.Parcelable;
  * Configuration parameters for the {@link DebugPortService}
  */
 public class Params implements Parcelable {
-    public static final int DEFAULT_PORT = 8562;
+    public static final int DEFAULT_ANDROID_PORT = 8562;
+    public static final int DEFAULT_SQLITE_PORT = 8563;
+    private int mDebugPort;
+    private int mSQLitePort;
     private String[] mStartupCommands;
-    private int mPort;
 
     public Params() {
-        mPort = DEFAULT_PORT;
+        mDebugPort = DEFAULT_ANDROID_PORT;
+        mSQLitePort = DEFAULT_SQLITE_PORT;
         mStartupCommands = new String[0];
     }
 
     /**
      * Set the port on which the {@link jwf.debugport.internal.TelnetServer} should be made available.
+     * @deprecated Use {@link #setDebugPort(int)} instead.
      */
+    @Deprecated
     public Params setPort(int port) {
-        mPort = port;
+        mDebugPort = port;
         return this;
     }
 
     /**
      * Get the port on which the {@link jwf.debugport.internal.TelnetServer} will be made available.
+     * @deprecated Use {@link #getDebugPort()} instead.
      */
+    @Deprecated
     public int getPort() {
-        return mPort;
+        return mDebugPort;
+    }
+
+    /**
+     * Set the port on which the debug port server will be made available.
+     */
+    public Params setDebugPort(int port) {
+        mDebugPort = port;
+        return this;
+    }
+
+    /**
+     * Get the port on which the debug port server will be made available.
+     */
+    public int getDebugPort() {
+        return mDebugPort;
+    }
+
+    /**
+     * Set the port on which the SQLite-context server will be made available.
+     */
+    public Params setSQLitePort(int port) {
+        mSQLitePort = port;
+        return this;
+    }
+
+    /**
+     * Get the port on which the SQLite-context server will be made available.
+     */
+    public int getSQLitePort() {
+        return mSQLitePort;
     }
 
     /**
@@ -56,7 +93,8 @@ public class Params implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mPort);
+        dest.writeInt(mDebugPort);
+        dest.writeInt(mSQLitePort);
         dest.writeInt(mStartupCommands.length);
         dest.writeStringArray(mStartupCommands);
     }
@@ -65,7 +103,8 @@ public class Params implements Parcelable {
         @Override
         public Params createFromParcel(Parcel source) {
             Params p = new Params();
-            p.setPort(source.readInt());
+            p.setDebugPort(source.readInt());
+            p.setSQLitePort(source.readInt());
 
             int startupCommandsLength = source.readInt();
             String[] startupCommands = new String[startupCommandsLength];

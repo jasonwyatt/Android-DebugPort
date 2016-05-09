@@ -8,71 +8,76 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.Socket;
 
-import bsh.Interpreter;
-import jwf.debugport.commands.Commands;
-
 /**
- *
+ * Base ClientConnection type.
  */
-class ClientConnection implements Runnable, Commands.ExitListener {
+public abstract class ClientConnection implements Runnable {
     private static final String TAG = "ClientConnection";
-    private final Socket mClient;
-    private final WeakReference<TelnetServer> mParent;
     private final Application mApp;
+    private final Socket mSocket;
+    private final WeakReference<TelnetServer> mParent;
     private final String[] mStartupCommands;
-    private TelnetConsoleInterface mConsole;
+    private String mLogTag;
 
     public ClientConnection(Context context, Socket client, TelnetServer parent, String[] startupCommands) {
         mApp = (Application) context.getApplicationContext();
-        mClient = client;
-        mParent = new WeakReference<>(parent);
+        mSocket = client;
+        mParent = new WeakReference<TelnetServer>(parent);
         mStartupCommands = startupCommands;
     }
 
+    public Application getApp() {
+        return mApp;
+    }
+
+    public Socket getSocket() {
+        return mSocket;
+    }
+
+    public TelnetServer getParent() {
+        return mParent.get();
+    }
+
+    public String[] getStartupCommands() {
+        return mStartupCommands;
+    }
+
     public void close() {
-        Log.i(TAG, "Client closing:" + mClient.toString());
-        TelnetServer parent = mParent.get();
+        logInfo("Client closing:" + getSocket().toString());
+        TelnetServer parent = getParent();
         if (parent != null) {
             parent.notifyClosing(this);
         }
         try {
-            mClient.close();
+            getSocket().close();
         } catch (IOException e) {
             // m'eh..
-            Log.e(TAG, "Error upon closing.", e);
+            logError("Error upon closing.", e);
         }
     }
 
-    @Override
-    public void run() {
-        try {
-            mConsole = new TelnetConsoleInterface(mClient.getInputStream(), mClient.getOutputStream());
-            Interpreter interpreter = new Interpreter(mConsole);
-            interpreter.setShowResults(true);
-            interpreter.set("cmd", new Commands(this));
-            interpreter.set("app", mApp);
-            interpreter.eval("importCommands(\"jwf.debugport.commands\")");
-
-            for (String startupCommand : mStartupCommands) {
-                interpreter.eval(startupCommand);
-            }
-
-            interpreter.setExitOnEOF(false);
-            interpreter.run();
-        } catch (Exception e) {
-            Log.e(TAG, "Error: ", e);
-        } finally {
-            close();
-        }
+    protected void logInfo(String msg) {
+        Log.i(getTag(), msg);
     }
 
-    @Override
-    public void onExit() {
-        try {
-            mConsole.close();
-        } catch (IOException e) {
-            // m'eh
-        }
-        close();
+    protected void logDebug(String msg) {
+        Log.d(getTag(), msg);
     }
+
+    protected void logError(String msg) {
+        Log.e(getTag(), msg);
+    }
+
+    protected void logError(String msg, Throwable t) {
+        Log.e(getTag(), msg, t);
+    }
+
+    private String getTag() {
+        if (mLogTag == null) {
+            mLogTag = getClass().getSimpleName();
+        }
+        return mLogTag;
+    }
+
+    public abstract void closeConnection();
 }

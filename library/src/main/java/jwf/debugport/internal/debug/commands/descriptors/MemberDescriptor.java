@@ -1,4 +1,4 @@
-package jwf.debugport.commands.descriptors;
+package jwf.debugport.internal.debug.commands.descriptors;
 
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Member;

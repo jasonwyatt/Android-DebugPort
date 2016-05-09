@@ -11,8 +11,10 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 
+import jwf.debugport.internal.debug.DebugTelnetServer;
 import jwf.debugport.internal.TelnetServer;
 import jwf.debugport.internal.Utils;
+import jwf.debugport.internal.sqlite.SQLiteTelnetServer;
 
 /**
  *
@@ -23,9 +25,9 @@ public class DebugPortService extends Service {
     private static final String ACTION_STOP = "jwf.debugport.ACTION_STOP";
     private static final int STOP_REQUEST_CODE = 0;
     private static final int NOTIFICATION_ID = R.id.debugport_notification_id;
-    private int mPort;
-    private TelnetServer mServer;
+    private TelnetServer mDebugServer;
     private PowerManager.WakeLock mWakeLock;
+    private SQLiteTelnetServer mSQLiteServer;
 
     /**
      * Utility method to start the DebugPortService
@@ -74,7 +76,14 @@ public class DebugPortService extends Service {
                     Notification.Builder builder = new Notification.Builder(DebugPortService.this);
                     builder.setSmallIcon(R.drawable.debugport_ic_notification);
                     builder.setContentTitle(getString(R.string.notification_title));
-                    builder.setContentText(getString(R.string.notification_subtitle, Utils.getIpAddress(context), params.getPort()));
+                    String ip = Utils.getIpAddress(context);
+                    String message = getString(R.string.notification_subtitle, ip, params.getDebugPort(), params.getSQLitePort());
+                    String summary = getString(R.string.notification_summary, ip, params.getDebugPort(), params.getSQLitePort());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        builder.setStyle(new Notification.BigTextStyle().bigText(message).setSummaryText(summary));
+                        builder.setContentText(message);
+                    }
+                    builder.setContentText(summary);
 
                     Intent stopIntent = new Intent(context, DebugPortService.class);
                     stopIntent.setAction(ACTION_STOP);
@@ -87,8 +96,10 @@ public class DebugPortService extends Service {
             @Override
             protected Params doInBackground(Params... params) {
                 try {
-                    mServer = new TelnetServer(DebugPortService.this, params[0]);
-                    mServer.startServer();
+                    mDebugServer = new DebugTelnetServer(DebugPortService.this, params[0]);
+                    mDebugServer.startServer();
+                    mSQLiteServer = new SQLiteTelnetServer(DebugPortService.this, params[0]);
+                    mSQLiteServer.startServer();
                 } catch (java.io.IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -103,8 +114,11 @@ public class DebugPortService extends Service {
     public void onDestroy() {
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.cancel(NOTIFICATION_ID);
-        if (mServer != null) {
-            mServer.killServer();
+        if (mDebugServer != null) {
+            mDebugServer.killServer();
+        }
+        if (mSQLiteServer != null) {
+            mSQLiteServer.killServer();
         }
         if (mWakeLock != null) {
             mWakeLock.release();

@@ -15,19 +15,21 @@ import jwf.debugport.Params;
 /**
  *
  */
-public class TelnetServer implements Runnable {
+public abstract class TelnetServer<T extends ClientConnection> implements Runnable {
     private static final String TAG = "TelnetServer";
     private final Object mLock = new Object();
     private final Context mApp;
     private final Params mParams;
+    private final int mPort;
     private ServerSocket mServerSocket;
     private Thread mThread;
     private volatile boolean mAlive = false;
-    private HashSet<ClientConnection> mClients = new HashSet<>();
+    private HashSet<T> mClients = new HashSet<>();
 
-    public TelnetServer(Context app, Params params) throws UnknownHostException {
+    public TelnetServer(Context app, Params params, int port) throws UnknownHostException {
         mApp = app;
         mParams = params;
+        mPort = port;
     }
 
     public void startServer() throws IOException {
@@ -61,7 +63,7 @@ public class TelnetServer implements Runnable {
     @Override
     public void run() {
         try {
-            mServerSocket = new ServerSocket(mParams.getPort());
+            mServerSocket = new ServerSocket(mPort);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -69,7 +71,7 @@ public class TelnetServer implements Runnable {
         Log.i(TAG, "Server running at "+ Utils.getIpAddress(mApp)+":"+mParams.getPort());
         while (mAlive) {
             Socket client;
-            ClientConnection clientConn;
+            T clientConn;
             if (mServerSocket == null) {
                 break;
             }
@@ -85,7 +87,7 @@ public class TelnetServer implements Runnable {
             }
 
             synchronized (mLock) {
-                clientConn = new ClientConnection(mApp, client, this, mParams.getStartupCommands());
+                clientConn = getClientConnection(mApp, client, this, mParams.getStartupCommands());
                 mClients.add(clientConn);
             }
             new Thread(clientConn).start();
@@ -93,7 +95,9 @@ public class TelnetServer implements Runnable {
         Log.i(TAG, "Shutdown.");
     }
 
-    public void notifyClosing(ClientConnection clientConnection) {
+    public abstract T getClientConnection(Context c, Socket socket, TelnetServer server, String[] startupCommands);
+
+    public void notifyClosing(T clientConnection) {
         if (!mAlive) {
             // we are dead anyway, no need to worry..
             return;

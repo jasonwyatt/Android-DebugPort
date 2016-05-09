@@ -1,4 +1,4 @@
-package jwf.debugport.commands;
+package jwf.debugport.internal.debug.commands;
 
 import android.text.TextUtils;
 import android.util.Log;

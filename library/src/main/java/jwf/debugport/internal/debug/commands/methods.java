@@ -1,9 +1,9 @@
-package jwf.debugport.commands;
+package jwf.debugport.internal.debug.commands;
 
 import bsh.CallStack;
 import bsh.Interpreter;
 import jwf.debugport.annotations.Command;
-import jwf.debugport.commands.descriptors.MethodDescriptor;
+import jwf.debugport.internal.debug.commands.descriptors.MethodDescriptor;
 
 /**
  *

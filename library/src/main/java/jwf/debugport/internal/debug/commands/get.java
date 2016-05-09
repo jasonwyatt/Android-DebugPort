@@ -1,4 +1,4 @@
-package jwf.debugport.commands;
+package jwf.debugport.internal.debug.commands;
 
 import java.lang.reflect.Field;
 
@@ -10,23 +10,21 @@ import jwf.debugport.annotations.Command;
  *
  */
 @Command
-public class set {
-    @Command.Help("Set the value of a field on the provided object to the given value, regardless of access modifiers.")
+public class get {
+    @Command.Help("Get the value of a field, regardless of access modifiers, on the provided object.")
     public static Object invoke(
             Interpreter interpreter,
-            CallStack callStack,
+            CallStack callstack,
             @Command.ParamName("obj") Object object,
-            @Command.ParamName("fieldName") String param,
-            @Command.ParamName("value") Object value) throws NoSuchFieldException, IllegalAccessException {
+            @Command.ParamName("fieldName") String param) throws NoSuchFieldException, IllegalAccessException {
         Field field;
         try {
             field = object.getClass().getDeclaredField(param);
         } catch (NoSuchFieldException e) {
-            // try a field on the inherited classes
+            // let's try a regular field..
             field = object.getClass().getField(param);
         }
         field.setAccessible(true);
-        field.set(object, value);
-        return value;
+        return field.get(object);
     }
 }

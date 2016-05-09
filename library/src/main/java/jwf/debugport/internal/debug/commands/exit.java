@@ -1,4 +1,4 @@
-package jwf.debugport.commands;
+package jwf.debugport.internal.debug.commands;
 
 import bsh.CallStack;
 import bsh.EvalError;

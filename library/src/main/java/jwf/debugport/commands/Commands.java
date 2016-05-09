@@ -19,6 +19,7 @@ public final class Commands {
         help.registerCommand(get.class);
         help.registerCommand(set.class);
         help.registerCommand(call.class);
+        help.registerCommand(source.class);
     }
 
     public Commands(ExitListener listener) {

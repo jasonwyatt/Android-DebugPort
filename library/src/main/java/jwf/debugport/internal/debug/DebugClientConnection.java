@@ -33,7 +33,7 @@ public class DebugClientConnection extends ClientConnection implements Commands.
             interpreter.setShowResults(true);
             interpreter.set("cmd", new Commands(this));
             interpreter.set("app", getApp());
-            interpreter.eval("importCommands(\"jwf.debugport.internal.android.commands\")");
+            interpreter.eval("importCommands(\"jwf.debugport.internal.debug.commands\")");
 
             for (String startupCommand : getStartupCommands()) {
                 interpreter.eval(startupCommand);

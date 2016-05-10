@@ -70,7 +70,7 @@ public abstract class TelnetServer<T extends ClientConnection> implements Runnab
             throw new RuntimeException(e);
         }
         mAlive = true;
-        Log.i(getTag(), "Server running at "+ Utils.getIpAddress(mApp)+":"+mParams.getPort());
+        Log.i(getTag(), "Server running at "+ Utils.getIpAddress(mApp)+":"+mPort);
         while (mAlive) {
             Socket client;
             T clientConn;

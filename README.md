@@ -58,14 +58,19 @@ Starting the DebugPort server is easy! Simply call the start method:
 
 Once started, you should see in the logs some information about where you can point your telnet client:
  
-    04-24 21:59:37.279 6835-6859/jwf.debugport.app I/TelnetServer: Server running at 192.168.2.83:8562
+    05-10 23:18:19.701 16813-17035/jwf.debugport.app I/DebugTelnetServer: Server running at 192.168.0.100:8562
+    05-10 23:18:19.700 16813-17036/jwf.debugport.app I/SQLiteTelnetServer: Server running at 192.168.0.100:8563
     
-### Connecting to the DebugPort
+### Connecting to the Debug Server
 
     $ telnet 192.168.2.83 8562
     Trying 192.168.2.83...
     Connected to 192.168.2.83.
     Escape character is '^]'.
+
+    Android DebugPort v1.0
+    Report issues at https://github.com/jasonwyatt/Android-DebugPort/issues
+    
     BeanShell 2.0b6 - by Pat Niemeyer (pat@pat.net)
     bsh %
 
@@ -113,6 +118,34 @@ Also, your application variable is automatically included as a global variable i
 Don't forget that you can execute whatever code you wish within the DebugPort. See the [beanshell documentation](http://beanshell.org/manual/contents.html) for the full rundown.
 
 You can exit at any time by running the `exit();` command.
+
+### Connecting to the SQLite Server
+
+    $ telnet 192.168.0.100 8563
+    Trying 192.168.0.100...
+    Connected to 192.168.0.100.
+    Escape character is '^]'.
+
+    Android DebugPort v1.0
+    Report issues at https://github.com/jasonwyatt/Android-DebugPort/issues
+
+    SQLite Database REPL
+
+    sqlite>
+    
+Try running `SHOW DATABASES;` to see the available databases for your app:
+
+    sqlite> show databases;
+    +----------+
+    | Database |
+    +----------+
+    | blog     |
+    | projects |
+    +----------+
+
+    sqlite>
+
+Run `USE [database name];` to connect to a database, and once you're connected, you can run any SQLite command you want.  You can quit at any time by running the `exit;` command.
 
 ## License
 This library is released under the [Apache 2.0 License](https://github.com/jasonwyatt/Android-DebugPort/blob/master/LICENCE).

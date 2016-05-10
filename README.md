@@ -133,7 +133,7 @@ You can exit at any time by running the `exit();` command.
 
     sqlite>
     
-Try running `SHOW DATABASES;` to see the available databases for your app:
+Try running `show databases;` to see the available databases for your app:
 
     sqlite> show databases;
     +----------+
@@ -145,7 +145,7 @@ Try running `SHOW DATABASES;` to see the available databases for your app:
 
     sqlite>
 
-Run `USE [database name];` to connect to a database, and once you're connected, you can run any SQLite command you want.  You can quit at any time by running the `exit;` command.
+Run `use [database name];` to connect to a database, and once you're connected, you can run any SQLite command you want.  You can quit at any time by running the `exit;` command.
 
 ## License
 This library is released under the [Apache 2.0 License](https://github.com/jasonwyatt/Android-DebugPort/blob/master/LICENCE).

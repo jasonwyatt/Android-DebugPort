@@ -3,6 +3,7 @@ package jwf.debugport.internal.sqlite.commands;
 import android.app.Application;
 
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import jwf.debugport.internal.Utils;
@@ -22,6 +23,7 @@ public class ShowDatabasesCommand extends SQLiteCommand {
     public void execute(SQLiteClientConnection connection, PrintWriter out, String commandString) {
         Application app = connection.getApp();
         String[] databaseList = app.databaseList();
+        Arrays.sort(databaseList);
         Object[][] data = new Object[databaseList.length][1];
         for (int i = 0; i < databaseList.length; i++) {
             data[i][0] = databaseList[i];

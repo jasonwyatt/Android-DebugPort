@@ -49,6 +49,7 @@ public abstract class ClientConnection implements Runnable {
             parent.notifyClosing(this);
         }
         try {
+            closeConnection();
             getSocket().close();
         } catch (IOException e) {
             // m'eh..

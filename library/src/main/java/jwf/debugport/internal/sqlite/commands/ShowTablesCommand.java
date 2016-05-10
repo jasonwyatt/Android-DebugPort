@@ -28,7 +28,7 @@ public class ShowTablesCommand extends SQLiteCommand {
             return;
         }
 
-        Cursor c = db.rawQuery("SELECT name AS 'Table' FROM sqlite_master", null);
+        Cursor c = db.rawQuery("SELECT name AS 'Table' FROM sqlite_master WHERE type = 'table' ORDER BY name", null);
         Utils.printTable(out, c);
     }
 }

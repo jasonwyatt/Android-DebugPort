@@ -4,11 +4,13 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.HashSet;
 
+import jwf.debugport.BuildConfig;
 import jwf.debugport.Params;
 
 
@@ -68,7 +70,7 @@ public abstract class TelnetServer<T extends ClientConnection> implements Runnab
             throw new RuntimeException(e);
         }
         mAlive = true;
-        Log.i(TAG, "Server running at "+ Utils.getIpAddress(mApp)+":"+mParams.getPort());
+        Log.i(getTag(), "Server running at "+ Utils.getIpAddress(mApp)+":"+mParams.getPort());
         while (mAlive) {
             Socket client;
             T clientConn;
@@ -77,12 +79,18 @@ public abstract class TelnetServer<T extends ClientConnection> implements Runnab
             }
             try {
                 client = mServerSocket.accept();
+                PrintWriter out = new PrintWriter(client.getOutputStream());
+                out.println();
+                out.println("Android DebugPort v" + BuildConfig.VERSION_NAME);
+                out.println("Report issues at https://github.com/jasonwyatt/Android-DebugPort/issues");
+                out.println();
+                out.flush();
             } catch (IOException e) {
                 if (e.getMessage().equals("Socket closed")) {
                     // no big deal, we are done here..
                     break;
                 }
-                Log.w(TAG, "An error occurred accepting a client connection.", e);
+                Log.w(getTag(), "An error occurred accepting a client connection.", e);
                 continue;
             }
 
@@ -92,7 +100,7 @@ public abstract class TelnetServer<T extends ClientConnection> implements Runnab
             }
             new Thread(clientConn).start();
         }
-        Log.i(TAG, "Shutdown.");
+        Log.i(getTag(), "Shutdown.");
     }
 
     public abstract T getClientConnection(Context c, Socket socket, TelnetServer server, String[] startupCommands);
@@ -106,5 +114,9 @@ public abstract class TelnetServer<T extends ClientConnection> implements Runnab
         synchronized (mLock) {
             mClients.remove(clientConnection);
         }
+    }
+
+    private String getTag() {
+        return getClass().getSimpleName();
     }
 }

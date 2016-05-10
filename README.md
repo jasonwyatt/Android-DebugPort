@@ -4,6 +4,11 @@
 
 Android DebugPort allows you to write and execute code within your app's context, at runtime, and from the comfort of your computer's terminal. Think of it as a window into your application through which you can both inspect _and_ modify its state.
 
+You can connect to one of two REPL servers running within your app:
+
+* Debug REPL - Run java-like code and inspect/modify the state of your android application.
+* SQLite REPL - Execute queries against your app's SQLite databaases.
+
 ## Getting Started
 
 ### Configure Your Dependencies

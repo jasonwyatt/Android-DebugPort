@@ -75,10 +75,10 @@ public class DebugPortService extends Service {
                     Context context = DebugPortService.this;
                     Notification.Builder builder = new Notification.Builder(DebugPortService.this);
                     builder.setSmallIcon(R.drawable.debugport_ic_notification);
-                    builder.setContentTitle(getString(R.string.notification_title));
+                    builder.setContentTitle(getString(R.string.debugport_notification_title));
                     String ip = Utils.getIpAddress(context);
-                    String message = getString(R.string.notification_subtitle, ip, params.getDebugPort(), params.getSQLitePort());
-                    String summary = getString(R.string.notification_summary, ip, params.getDebugPort(), params.getSQLitePort());
+                    String message = getString(R.string.debugport_notification_subtitle, ip, params.getDebugPort(), params.getSQLitePort());
+                    String summary = getString(R.string.debugport_notification_summary, ip, params.getDebugPort(), params.getSQLitePort());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         builder.setStyle(new Notification.BigTextStyle().bigText(message).setSummaryText(summary));
                         builder.setContentText(message);

@@ -22,9 +22,9 @@ allprojects {
 In your application's `build.gradle` file, add a dependency for Android DebugPort:
 
 ```groovy
-debugCompile 'com.github.jasonwyatt:Android-DebugPort:0.5'
-testCompile 'com.github.jasonwyatt:Android-DebugPort:0.5'
-releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:0.5'
+debugCompile 'com.github.jasonwyatt:Android-DebugPort:1.0'
+testCompile 'com.github.jasonwyatt:Android-DebugPort:1.0'
+releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:1.0'
 ```
 
 **Note:** The final line above will use a [no-op version of the DebugPort library](https://github.com/jasonwyatt/Android-DebugPort-NOOP) in production builds. This makes it impossible for people to run the DebugPort server on a production build.

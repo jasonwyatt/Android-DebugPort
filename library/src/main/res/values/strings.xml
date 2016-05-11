@@ -1,5 +1,4 @@
 <resources>
-    <string name="debugport_app_name">Android DebugPort</string>
     <string name="debugport_notification_title">Android DebugPort Running</string>
     <string name="debugport_notification_subtitle">Debug Running at %1$s:%2$d\nSQLite Running at %1$s:%3$d</string>
     <string name="debugport_notification_summary">Debug: %1$s:%2$d, SQLite: %1$s:%3$d</string>

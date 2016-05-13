@@ -155,9 +155,3 @@ Run `use [database name];` to connect to a database, and once you're connected, 
 ## License
 This library is released under the [Apache 2.0 License](https://github.com/jasonwyatt/Android-DebugPort/blob/master/LICENCE).
 
-# Open Source Disclaimers
-
-> Jason Feinstein, hereby disclaims all copyright interest in the library `BeanShell' (a library for parsing and evaluating expressions at runtime in Java) written by beanshell.org.
->
-> signature of Jason Feinstein, 24 April 2016
-> Jason Feinstein

@@ -9,7 +9,7 @@ import jwf.debugport.annotations.Command;
 /**
  *
  */
-@Command
+@Command(group = Command.GROUP_ACCESS)
 public class get {
     @Command.Help("Get the value of a field, regardless of access modifiers, on the provided object.")
     public static Object invoke(

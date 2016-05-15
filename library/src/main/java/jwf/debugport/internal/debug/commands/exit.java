@@ -10,7 +10,7 @@ import jwf.debugport.annotations.Command;
  */
 @Command
 public class exit {
-    @Command.Help("Exit this interpreter")
+    @Command.Help("Exit this interpreter.")
     public static void invoke(Interpreter env, CallStack callStack) {
         env.println("Thanks for using Android DebugPort!");
         try {

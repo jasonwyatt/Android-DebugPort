@@ -8,7 +8,7 @@ import jwf.debugport.internal.debug.commands.descriptors.MethodDescriptor;
 /**
  *
  */
-@Command
+@Command(group = Command.GROUP_METHOD_INSPECTION)
 public class methodsLocal {
     @Command.Help("Show all of the locally-declared methods for the provided object.")
     public static void invoke(Interpreter interpreter, CallStack callStack, @Command.ParamName("obj") Object obj) {

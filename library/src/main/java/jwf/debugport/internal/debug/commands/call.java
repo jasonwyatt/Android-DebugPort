@@ -10,7 +10,7 @@ import jwf.debugport.annotations.Command;
 /**
  *
  */
-@Command
+@Command(group = Command.GROUP_ACCESS)
 public class call {
     /*
      * In order to support a varargs-like behavior when the command is called with no third

@@ -8,7 +8,7 @@ import jwf.debugport.internal.debug.commands.descriptors.FieldDescriptor;
 /**
  *
  */
-@Command
+@Command(group = Command.GROUP_FIELD_INSPECTION)
 public class fields {
     @Command.Help("List all of the fields available for a particular object.")
     public static void invoke(Interpreter interpreter, CallStack callStack, @Command.ParamName("obj") Object obj) {

@@ -11,6 +11,12 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Command {
+    String GROUP_METHOD_INSPECTION = "Method Inspection";
+    String GROUP_FIELD_INSPECTION = "Field Inspection";
+    String GROUP_ACCESS = "Access";
+    String GROUP_OTHER = "Other";
+
+    String group() default GROUP_OTHER;
 
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)

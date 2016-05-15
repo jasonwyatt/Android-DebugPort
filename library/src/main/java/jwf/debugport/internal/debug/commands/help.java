@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 import bsh.CallStack;
 import bsh.Interpreter;
 import jwf.debugport.annotations.Command;
+import jwf.debugport.internal.Utils;
 
 /**
  *
@@ -20,8 +21,9 @@ import jwf.debugport.annotations.Command;
 public class help {
     private static final ArrayList<CommandHelpInfo> sCommandHelp = new ArrayList<>();
     private static final int MAX_WIDTH = 100;
-    private static final int NAME_START_COL = 2;
-    private static final int HELP_START_COL = 6;
+    private static final int NAME_START_COL = 6;
+    private static final int HELP_START_COL = 10;
+    private static final int GROUP_START_COL = 2;
 
     @Command.Help("Show this help message.")
     public static void invoke(Interpreter interpreter, CallStack callStack) {
@@ -38,8 +40,20 @@ public class help {
 
             StringBuilder builder = new StringBuilder();
             builder.append("Available Commands:");
+            String lastCommandGroup = "__not_a_group__";
             for (CommandHelpInfo info : sCommandHelp) {
                 builder.append("\n");
+                String commandGroup = info.getCommandGroup();
+                if (!commandGroup.equalsIgnoreCase(lastCommandGroup)) {
+                    if (!lastCommandGroup.equals("__not_a_group__")) {
+                        builder.append("\n");
+                    }
+                    builder.append(CommandUtils.spaces(GROUP_START_COL))
+                            .append(commandGroup)
+                            .append(":")
+                            .append("\n");
+                    lastCommandGroup = commandGroup;
+                }
                 info.appendHelpInfo(builder, nameStartCol, helpStartCol, MAX_WIDTH);
             }
             builder.append("\n");
@@ -54,15 +68,17 @@ public class help {
         if (!command.isAnnotationPresent(Command.class)) {
             return;
         }
-        sCommandHelp.add(new CommandHelpInfo(command));
+        sCommandHelp.add(new CommandHelpInfo(command, (Command) command.getAnnotation(Command.class)));
         Collections.sort(sCommandHelp);
     }
 
     public static class CommandHelpInfo implements Comparable<CommandHelpInfo> {
         private final Class mCommandClass;
+        private final Command mAnnotation;
 
-        public CommandHelpInfo(Class commandClass) {
+        public CommandHelpInfo(Class commandClass, Command annotation) {
             mCommandClass = commandClass;
+            mAnnotation = annotation;
         }
 
         public int getMaxSignatureLength() {
@@ -80,6 +96,10 @@ public class help {
                 }
             }
             return maxLength;
+        }
+
+        public String getCommandGroup() {
+            return mAnnotation.group();
         }
 
         private String getSignature(Method method) {
@@ -166,6 +186,10 @@ public class help {
         public int compareTo(CommandHelpInfo another) {
             if (another == null) {
                 return -1;
+            }
+            int groupCompare = mAnnotation.group().compareTo(another.mAnnotation.group());
+            if (groupCompare != 0) {
+                return groupCompare;
             }
             return mCommandClass.getSimpleName().compareTo(another.mCommandClass.getSimpleName());
         }

@@ -9,7 +9,7 @@ import jwf.debugport.annotations.Command;
 /**
  *
  */
-@Command
+@Command(group = Command.GROUP_ACCESS)
 public class set {
     @Command.Help("Set the value of a field on the provided object to the given value, regardless of access modifiers.")
     public static Object invoke(

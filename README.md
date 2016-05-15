@@ -138,6 +138,42 @@ You can exit at any time by running the `exit();` command.
 
     sqlite>
     
+As with the Debug server, there is a help command for the SQLite server:
+
+    sqlite> help;
+    Help:
+      As you'd expect, you can execute any valid SQLite statements against the database to which you're
+      currently connected (see: `USE [database name];` below).
+    
+      In addition to regular SQLite commands, Android DebugPort provides additional functionality via several
+      additional commands.
+    
+      Available non-SQLite commands (case insensitive):
+        Databases:
+            CREATE DATABASE [database name];
+                Create a new database called [database name].
+            DROP DATABASE [database name];
+                Drop the database named [database name] from the app's collection of databases.
+            USE [database name];
+                Connect to the database called [database name]. All SQL commands will be executed against
+                this database until USE is called again.
+    
+        Inspection:
+            SHOW CREATE TABLE [table name];
+                Show the CREATE TABLE command used to create [table name].
+            SHOW DATABASES;
+                Show all available databases for the app, including temporary databases.
+            SHOW TABLES;
+                Show all of the tables defined for the database to which you are currently connected.
+    
+        Other:
+            exit; or quit;
+                Exit this interpreter.
+            help;
+                Show this help message.
+    
+    sqlite>
+    
 Try running `show databases;` to see the available databases for your app:
 
     sqlite> show databases;

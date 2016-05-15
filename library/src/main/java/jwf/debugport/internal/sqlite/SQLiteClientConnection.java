@@ -1,15 +1,11 @@
 package jwf.debugport.internal.sqlite;
 
-import android.app.Application;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.net.Socket;
 import java.util.Scanner;
 

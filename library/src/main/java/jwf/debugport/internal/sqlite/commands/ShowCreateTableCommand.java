@@ -2,10 +2,8 @@ package jwf.debugport.internal.sqlite.commands;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.text.TextUtils;
 
 import java.io.PrintWriter;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

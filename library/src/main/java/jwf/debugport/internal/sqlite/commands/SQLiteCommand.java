@@ -1,12 +1,9 @@
 package jwf.debugport.internal.sqlite.commands;
 
-import android.app.Application;
-
 import java.io.PrintWriter;
 import java.util.regex.Pattern;
 
 import jwf.debugport.internal.sqlite.SQLiteClientConnection;
-import jwf.debugport.internal.sqlite.SQLiteTelnetServer;
 
 /**
  * Abstract command..

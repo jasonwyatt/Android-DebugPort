@@ -12,7 +12,6 @@ import java.util.StringTokenizer;
 import bsh.CallStack;
 import bsh.Interpreter;
 import jwf.debugport.annotations.Command;
-import jwf.debugport.internal.Utils;
 
 /**
  *

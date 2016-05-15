@@ -13,6 +13,8 @@ import java.util.Locale;
  *
  */
 public class Utils {
+    public static final int INDENT_SPACES = 2;
+
     @SuppressLint("DefaultLocale")
     public static String getIpAddress(Context context) {
         WifiManager wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -120,5 +122,13 @@ public class Utils {
     public static String nanosToMillis(long nanos) {
         float millis = nanos / 1000000.0f;
         return String.format(Locale.getDefault(), "%.3fms", millis);
+    }
+
+    public static String spaces(int spaces) {
+        return multStr(" ", spaces);
+    }
+
+    public static String indent(int indentations) {
+        return spaces(indentations * INDENT_SPACES);
     }
 }

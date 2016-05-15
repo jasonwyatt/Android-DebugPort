@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import jwf.debugport.annotations.Command;
 import jwf.debugport.internal.Utils;
 import jwf.debugport.internal.sqlite.SQLiteClientConnection;
 import jwf.debugport.internal.sqlite.SQLiteOpenHelper;
@@ -13,6 +14,11 @@ import jwf.debugport.internal.sqlite.SQLiteOpenHelper;
 /**
  * Created by jason on 5/9/16.
  */
+@Command.Help(
+        format = "CREATE DATABASE [database name];",
+        value = "Create a new database called [database name].",
+        group = Command.GROUP_SQL_DATABASES
+)
 public class CreateDatabaseCommand extends SQLiteCommand {
     private static final Pattern command = Pattern.compile("\\s*create\\s+database\\s+(\\w+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 

@@ -3,6 +3,7 @@ package jwf.debugport.internal.debug.commands;
 import bsh.CallStack;
 import bsh.Interpreter;
 import jwf.debugport.annotations.Command;
+import jwf.debugport.internal.Utils;
 import jwf.debugport.internal.debug.commands.descriptors.MethodDescriptor;
 
 /**
@@ -26,7 +27,7 @@ public class methods {
 
         sb.append("available methods: {\n");
         for (MethodDescriptor method : methods) {
-            sb.append(CommandUtils.indent(1));
+            sb.append(Utils.indent(1));
             sb.append(method.toString());
             sb.append("\n");
         }

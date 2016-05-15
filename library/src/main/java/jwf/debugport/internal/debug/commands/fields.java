@@ -3,6 +3,7 @@ package jwf.debugport.internal.debug.commands;
 import bsh.CallStack;
 import bsh.Interpreter;
 import jwf.debugport.annotations.Command;
+import jwf.debugport.internal.Utils;
 import jwf.debugport.internal.debug.commands.descriptors.FieldDescriptor;
 
 /**
@@ -27,7 +28,7 @@ public class fields {
         sb.append("fields {\n");
 
         for (FieldDescriptor field : fields) {
-            sb.append(CommandUtils.indent(1));
+            sb.append(Utils.indent(1));
             sb.append(field.toString());
             sb.append("\n");
         }

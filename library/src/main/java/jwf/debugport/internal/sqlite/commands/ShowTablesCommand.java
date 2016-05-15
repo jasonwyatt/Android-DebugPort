@@ -6,12 +6,18 @@ import android.database.sqlite.SQLiteDatabase;
 import java.io.PrintWriter;
 import java.util.regex.Pattern;
 
+import jwf.debugport.annotations.Command;
 import jwf.debugport.internal.Utils;
 import jwf.debugport.internal.sqlite.SQLiteClientConnection;
 
 /**
  * Created by jason on 5/9/16.
  */
+@Command.Help(
+        format = "SHOW TABLES;",
+        value = "Show all of the tables defined for the database to which you are currently connected.",
+        group = Command.GROUP_SQL_INSPECTION
+)
 public class ShowTablesCommand extends SQLiteCommand {
     public static final Pattern command = Pattern.compile("show\\s+tables", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 

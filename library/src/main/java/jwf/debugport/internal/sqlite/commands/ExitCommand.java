@@ -3,11 +3,16 @@ package jwf.debugport.internal.sqlite.commands;
 import java.io.PrintWriter;
 import java.util.regex.Pattern;
 
+import jwf.debugport.annotations.Command;
 import jwf.debugport.internal.sqlite.SQLiteClientConnection;
 
 /**
  * Created by jason on 5/9/16.
  */
+@Command.Help(
+        value = "Exit this interpreter.",
+        format = "exit; or quit;"
+)
 public class ExitCommand extends SQLiteCommand {
     private static final Pattern command = Pattern.compile("^\\s*exit|quit\\s*$", Pattern.CASE_INSENSITIVE);
 

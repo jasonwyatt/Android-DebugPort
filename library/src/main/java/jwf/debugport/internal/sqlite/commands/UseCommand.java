@@ -4,11 +4,17 @@ import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import jwf.debugport.annotations.Command;
 import jwf.debugport.internal.sqlite.SQLiteClientConnection;
 
 /**
  *
  */
+@Command.Help(
+        format = "USE [database name];",
+        value = "Connect to the database called [database name]. All SQL commands will be executed against this database until USE is called again.",
+        group = Command.GROUP_SQL_DATABASES
+)
 public class UseCommand extends SQLiteCommand {
     private static final Pattern command = Pattern.compile("\\s*use\\s+(\\w+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 

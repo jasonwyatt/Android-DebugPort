@@ -7,11 +7,17 @@ import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import jwf.debugport.annotations.Command;
 import jwf.debugport.internal.sqlite.SQLiteClientConnection;
 
 /**
  * Print the CREATE TABLE syntax for a table.
  */
+@Command.Help(
+        format = "SHOW CREATE TABLE [table name];",
+        value = "Show the CREATE TABLE command used to create [table name].",
+        group = Command.GROUP_SQL_INSPECTION
+)
 public class ShowCreateTableCommand extends SQLiteCommand {
     private static final Pattern command = Pattern.compile("(show\\s+create\\s+table|schema)\\s+(\\w+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 

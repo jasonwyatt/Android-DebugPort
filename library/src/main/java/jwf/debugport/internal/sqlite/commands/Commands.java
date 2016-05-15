@@ -16,7 +16,12 @@ public final class Commands {
                 new UseCommand(),
                 new ShowTablesCommand(),
                 new ShowCreateTableCommand(),
+                new HelpCommand(),
         };
+    }
+
+    public final SQLiteCommand[] getCommands() {
+        return mAvailableCommands;
     }
 
     public SQLiteCommand getCommand(String input) {

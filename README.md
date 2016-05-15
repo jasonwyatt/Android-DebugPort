@@ -83,32 +83,41 @@ There are a few built in commands, to see what they are, run `help();`
   
     bsh % help();
     Available Commands:
-      call(Object obj, String method, Object... params)
-          Call a method, regardless of access modifiers, on the provided object.
-      exit()
-          Exit this interpreter
-      fields(Class class)
-          List all of the fields available for a particular class.
-      fields(Object obj)
-          List all of the fields available for a particular object.
-      fieldsLocal(Class class)
-          List all of the fields defined locally for a particular class.
-      fieldsLocal(Object obj)
-          List all of the fields defined locally for an object.
-      get(Object obj, String fieldName)
-          Get the value of a field, regardless of access modifiers, on the provided object.
-      help()
-          Show this help message.
-      methods(Class class)
-          Get the available methods for the provided class.
-      methods(Object obj)
-          Get the available methods for the provided object.
-      methodsLocal(Class class)
-          Show all of the locally-declared methods for the provided class.
-      methodsLocal(Object obj)
-          Show all of the locally-declared methods for the provided object.
-      set(Object obj, String fieldName, Object value)
-          Set the value of a field on the provided object to the given value, regardless of access modifiers.
+      Access:
+          call(Object obj, String method, Object... params)
+              Call a method, regardless of access modifiers, on the provided object.
+          get(Object obj, String fieldName)
+              Get the value of a field, regardless of access modifiers, on the provided object.
+          set(Object obj, String fieldName, Object value)
+              Set the value of a field on the provided object to the given value, regardless of access modifiers.
+    
+      Field Inspection:
+          fields(Class class)
+              List all of the fields available for a particular class.
+          fields(Object obj)
+              List all of the fields available for a particular object.
+          fieldsLocal(Class class)
+              List all of the fields defined locally for a particular class.
+          fieldsLocal(Object obj)
+              List all of the fields defined locally for an object.
+    
+      Method Inspection:
+          methods(Class class)
+              Get the available methods for the provided class.
+          methods(Object obj)
+              Get the available methods for the provided object.
+          methodsLocal(Class class)
+              Show all of the locally-declared methods for the provided class.
+          methodsLocal(Object obj)
+              Show all of the locally-declared methods for the provided object.
+    
+      Other:
+          exit()
+              Exit this interpreter.
+          help()
+              Show this help message.
+          source(String scriptPath)
+              Load and run a Beanshell script within your app's assets folder.
     
     bsh %
 

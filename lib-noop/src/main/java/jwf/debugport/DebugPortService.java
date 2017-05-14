@@ -4,8 +4,6 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 /**
  * No-op implementation of DebugPortService.
@@ -20,7 +18,7 @@ public class DebugPortService extends Service {
         return params;
     }
 
-    public static void start(Context context, @NonNull Params params) {
+    public static void start(Context context, Params params) {
     }
 
     public static void stop(Context context) {
@@ -29,7 +27,6 @@ public class DebugPortService extends Service {
     public static void kill(Context context) {
     }
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;

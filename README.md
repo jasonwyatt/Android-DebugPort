@@ -2,14 +2,14 @@
 
 # Android DebugPort
 
-Android DebugPort allows you to write and execute code within your app's context, at runtime, and from the comfort of your computer's terminal. Think of it as a window into your application through which you can both inspect _and_ modify its state.
+Android DebugPort is a drop-in utility which allows you to write and execute code within your app's context, at runtime, and from the comfort of your computer's terminal. Think of it as a window into your application through which you can both inspect _and_ modify its state.
 
 You can connect to one of two REPL servers running within your app:
 
 * Debug REPL - Run java-like code and inspect/modify the state of your android application.
 * SQLite REPL - Execute queries against your app's SQLite databaases.
 
-## Getting Started
+## Getting Started - Drop-in
 
 ### Configure Your Dependencies
 
@@ -28,43 +28,14 @@ In your application's `build.gradle` file, add a dependency for Android DebugPor
 
 ```groovy
 debugCompile 'com.github.jasonwyatt:Android-DebugPort:1.1.0'
-testCompile 'com.github.jasonwyatt:Android-DebugPort:1.1.0'
 releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:1.1.0'
 ```
 
 **Note:** The final line above will use a [no-op version of the DebugPort library](https://github.com/jasonwyatt/Android-DebugPort-NOOP) in production builds. This makes it impossible for people to run the DebugPort server on a production build.
     
-### Modify Your Manifest
+### Run Your App
 
-You'll need to make sure the following permissions are configured in your app's `ApplicationManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-```
-
-Also, you need to declare the `DebugPortService` as a `<service>` in the manifest's `<application>` element:
-
-```xml
-<application
-    ...
-    >
-    
-    <!-- Your App's stuff... -->
-    <service android:name="jwf.debugport.DebugPortService" android:exported="false" />
-</application>
-```
-
-### Running the Server
-
-Starting the DebugPort server is easy! Simply call the start method:
-
-    DebugPortService.start(context);
-
-Once started, you should see in the logs some information about where you can point your telnet client:
- 
-    05-10 23:18:19.701 16813-17035/jwf.debugport.app I/DebugTelnetServer: Server running at 192.168.0.100:8562
-    05-10 23:18:19.700 16813-17036/jwf.debugport.app I/SQLiteTelnetServer: Server running at 192.168.0.100:8563
+When you start your app after building for debug, you will see a low-priority notification in your system tray which will allow you to start the debugport servers.
     
 ### Connecting to the Debug Server
 
@@ -196,6 +167,29 @@ Try running `show databases;` to see the available databases for your app:
     sqlite>
 
 Run `use [database name];` to connect to a database, and once you're connected, you can run any SQLite command you want.  You can quit at any time by running the `exit;` command.
+
+## Advanced Configuration
+
+You can configure Android-DebugPort by setting any of the following `<meta-data>` values in your Application's `AndroidManifest.xml`.
+
+```xml
+<application 
+    name=".MyApplication"
+    label="@string/app_name"
+    >
+    
+    <!-- Customize the port on which the BeanShell REPL will be exposed. -->
+    <meta-data android:name="jwf.debugport.METADATA_DEBUG_PORT" android:value="8000"/>
+    <!-- Customize the port on which the SQLite REPL will be exposed. -->
+    <meta-data android:name="jwf.debugport.METADATA_SQLITE_PORT" android:value="9000"/>
+    <!-- Provide any startup commands for the BeanShell REPL by referencing a string array resource. -->
+    <meta-data android:name="jwf.debugport.METADATA_STARTUP_COMMANDS" android:resource="@array/startup_commands"/>
+    
+    <!-- ... -->
+</application>
+```
+
+**Note:** It is recommended that if you wish to supply these meta-data values, you should consider setting them within an `AndroidManifest.xml` file for the `debug` build variant.
 
 ## License
 This library is released under the [Apache 2.0 License](https://github.com/jasonwyatt/Android-DebugPort/blob/master/LICENCE).

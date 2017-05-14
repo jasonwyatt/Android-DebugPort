@@ -23,7 +23,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.1'
+
     debugCompile project(':library')
-    testCompile project(':library')
-    releaseCompile 'com.github.jasonwyatt:Android-DebugPort-NOOP:0.3.1'
+    releaseCompile project(':library-noop')
 }

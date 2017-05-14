@@ -96,7 +96,7 @@ public class DebugPortService extends Service {
             mWakeLock = null;
         }
         mServersStarted = false;
-        showNotification(false);
+        showNotification();
     }
 
     private void startServers(Params params) {
@@ -115,7 +115,7 @@ public class DebugPortService extends Service {
             @SuppressWarnings("deprecation")
             @Override
             protected void onPostExecute(Void res) {
-                showNotification(true);
+                showNotification();
             }
 
             @Override
@@ -133,8 +133,8 @@ public class DebugPortService extends Service {
         }.execute(params);
     }
 
-    private void showNotification(boolean running) {
-        startForeground(NOTIFICATION_ID, buildNotification(running, mParams));
+    private void showNotification() {
+        startForeground(NOTIFICATION_ID, buildNotification(mParams));
     }
 
     @Override
@@ -145,7 +145,7 @@ public class DebugPortService extends Service {
             Params params = intent.getParcelableExtra(INTENT_EXTRA_PARAMS);
             startServers(params);
         } else if (ACTION_INITIALIZE.equals(intent.getAction())) {
-            showNotification(false);
+            showNotification();
         } else if (ACTION_KILL.equals(intent.getAction())) {
             kill(this);
             return START_NOT_STICKY;
@@ -162,7 +162,7 @@ public class DebugPortService extends Service {
         stopForeground(true);
     }
 
-    private Notification buildNotification(boolean running, @Nullable Params params) {
+    private Notification buildNotification(@Nullable Params params) {
         if (params == null) {
             params = getManifestParams(this);
         }
@@ -170,7 +170,7 @@ public class DebugPortService extends Service {
         String ip = Utils.getIpAddress(this);
         String message;
         String summary;
-        if (running) {
+        if (mServersStarted) {
             message = getString(R.string.debugport_notification_subtitle_running, ip, params.getDebugPort(), params.getSQLitePort());
             summary = getString(R.string.debugport_notification_summary_running, ip, params.getDebugPort(), params.getSQLitePort());
         } else {
@@ -180,11 +180,16 @@ public class DebugPortService extends Service {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.drawable.debugport_ic_notification);
-        builder.setContentTitle(getString(R.string.debugport_notification_title));
+        int appLabel = getApplicationInfo().labelRes;
+        if (appLabel == 0) {
+            builder.setContentTitle(getString(R.string.debugport_notification_title_plain));
+        } else {
+            builder.setContentTitle(getString(R.string.debugport_notification_title, getString(appLabel)));
+        }
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(message).setSummaryText(summary));
         builder.setPriority(NotificationCompat.PRIORITY_MIN);
         builder.setContentText(message);
-        builder.addAction(running ? buildStopAction() : buildStartAction(params));
+        builder.addAction(mServersStarted ? buildStopAction() : buildStartAction(params));
         builder.addAction(buildKillAction());
 
         return builder.build();

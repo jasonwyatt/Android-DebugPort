@@ -37,13 +37,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         TextView debugStatus = (TextView) findViewById(R.id.debug_server_status);
         TextView sqliteStatus = (TextView) findViewById(R.id.sqlite_server_status);
         if (isChecked) {
-            Params params = new Params()
-                    .setStartupCommands(new String[]{
-                            "import android.os.*;",
-                            "import java.util.*;",
-                            "x = 1+1;",
-                    });
-            DebugPortService.start(this, params);
+            Params params = DebugPortService.start(this);
             if (debugStatus != null) {
                 debugStatus.setText(getString(R.string.debug_server_status, getIpAddress(), params.getDebugPort()));
                 debugStatus.setVisibility(View.VISIBLE);
@@ -64,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     }
 
     public String getIpAddress() {
-        WifiManager wifiMan = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiMan = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInf = wifiMan.getConnectionInfo();
         int ipAddress = wifiInf.getIpAddress();
         return String.format(Locale.getDefault(), "%d.%d.%d.%d", (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));

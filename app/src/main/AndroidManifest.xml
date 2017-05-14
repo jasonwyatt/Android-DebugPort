@@ -1,8 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jwf.debugport.app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,14 +8,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".App">
+
+        <meta-data android:name="jwf.debugport.METADATA_DEBUG_PORT" android:value="8000"/>
+        <meta-data android:name="jwf.debugport.METADATA_SQLITE_PORT" android:value="9000"/>
+        <meta-data android:name="jwf.debugport.METADATA_STARTUP_COMMANDS" android:resource="@array/startup_commands"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-
-        <service android:name="jwf.debugport.DebugPortService" android:exported="false" />
     </application>
 
 </manifest>

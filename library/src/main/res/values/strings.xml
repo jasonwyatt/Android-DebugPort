@@ -1,5 +1,11 @@
 <resources>
-    <string name="debugport_notification_title">Android DebugPort Running</string>
-    <string name="debugport_notification_subtitle">Debug Running at %1$s:%2$d\nSQLite Running at %1$s:%3$d</string>
-    <string name="debugport_notification_summary">Debug: %1$s:%2$d, SQLite: %1$s:%3$d</string>
+    <string name="debugport_notification_title_plain">Android DebugPort</string>
+    <string name="debugport_notification_title">Android DebugPort: %s</string>
+    <string name="debugport_notification_subtitle_running">Debug Running at %1$s:%2$d\nSQLite Running at %1$s:%3$d</string>
+    <string name="debugport_notification_subtitle_stopped">Stopped</string>
+    <string name="debugport_notification_summary_running">Debug: %1$s:%2$d, SQLite: %1$s:%3$d</string>
+    <string name="debugport_notification_summary_stopped">Stopped</string>
+    <string name="debugport_notification_action_stop">Stop</string>
+    <string name="debugport_notification_action_start">Start</string>
+    <string name="debugport_notification_action_kill">Kill</string>
 </resources>

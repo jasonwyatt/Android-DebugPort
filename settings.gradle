@@ -1,1 +1,1 @@
-include ':app', ':library', ':library-noop'
+include ':app', ':lib', ':lib-noop'

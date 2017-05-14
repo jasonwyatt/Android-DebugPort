@@ -1,6 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jwf.debugport.app">
 
+    <!--
+    Only used when running in `release` variant, for the code that displays the current ip..
+    not needed for your app, unless you also wish to access wifi state.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

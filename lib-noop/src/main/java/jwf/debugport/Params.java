@@ -2,7 +2,6 @@ package jwf.debugport;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
 
 /**
  * Duplicate of Params class for no-op production usage.
@@ -46,7 +45,7 @@ public class Params implements Parcelable {
         return mSQLitePort;
     }
 
-    public Params setStartupCommands(@Nullable String[] commands) {
+    public Params setStartupCommands(String[] commands) {
         return this;
     }
 

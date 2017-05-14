@@ -1,4 +1,4 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--DebugPort-green.svg?style=true)](https://android-arsenal.com/details/1/3540) [![License: Apache2.0](https://img.shields.io/badge/style-apache%202.0-blue.svg?style=flat&label=license)](http://www.apache.org/licenses/LICENSE-2.0)
+[![](https://jitpack.io/v/jasonwyatt/Android-DebugPort.svg)](https://jitpack.io/#jasonwyatt/Android-DebugPort) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--DebugPort-green.svg?style=true)](https://android-arsenal.com/details/1/3540) [![License: Apache2.0](https://img.shields.io/badge/style-apache%202.0-blue.svg?style=flat&label=license)](http://www.apache.org/licenses/LICENSE-2.0)
 
 # Android DebugPort
 

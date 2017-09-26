@@ -27,8 +27,8 @@ allprojects {
 In your application's `build.gradle` file, add a dependency for Android DebugPort:
 
 ```groovy
-debugCompile 'com.github.jasonwyatt.Android-DebugPort:lib:2.0.0'
-releaseCompile 'com.github.jasonwyatt.Android-DebugPort:lib-noop:2.0.0'
+debugCompile 'com.github.jasonwyatt.Android-DebugPort:lib:2.1.0'
+releaseCompile 'com.github.jasonwyatt.Android-DebugPort:lib-noop:2.1.0'
 ```
 
 **Note:** The final line above will use a [no-op version of the DebugPort library](https://github.com/jasonwyatt/Android-DebugPort-NOOP) in production builds. This makes it impossible for people to run the DebugPort server on a production build.
@@ -39,7 +39,7 @@ When you start your app after building for debug, you will see a low-priority no
     
 ### Connecting to the Debug Server
 
-    $ telnet 192.168.2.83 8562
+    $ telnet 192.168.2.83 8562 # on MacOS High Sierra: `nc 192.168.2.83 8562`
     Trying 192.168.2.83...
     Connected to 192.168.2.83.
     Escape character is '^]'.
@@ -106,7 +106,7 @@ You can exit at any time by running the `exit();` command.
 
 ### Connecting to the SQLite Server
 
-    $ telnet 192.168.0.100 8563
+    $ telnet 192.168.0.100 8563 # on MacOS High Sierra: `nc 192.168.2.83 8563`
     Trying 192.168.0.100...
     Connected to 192.168.0.100.
     Escape character is '^]'.

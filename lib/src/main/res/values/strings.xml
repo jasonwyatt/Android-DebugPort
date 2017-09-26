@@ -8,4 +8,5 @@
     <string name="debugport_notification_action_stop">Stop</string>
     <string name="debugport_notification_action_start">Start</string>
     <string name="debugport_notification_action_kill">Kill</string>
+    <string name="debugport_notification_channel_name">Android DebugPort</string>
 </resources>

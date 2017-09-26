@@ -1,6 +1,8 @@
 package jwf.debugport;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -27,6 +30,7 @@ import jwf.debugport.internal.sqlite.SQLiteTelnetServer;
  */
 public class DebugPortService extends Service {
     private static final String TAG = "DebugPortService";
+    private static final String NOTIFICATION_CHANNEL = "androiddebugport";
     public static final String METADATA_DEBUG_PORT = "jwf.debugport.METADATA_DEBUG_PORT";
     public static final String METADATA_SQLITE_PORT = "jwf.debugport.METADATA_SQLITE_PORT";
     public static final String METADATA_STARTUP_COMMANDS = "jwf.debugport.METADATA_STARTUP_COMMANDS";
@@ -163,6 +167,11 @@ public class DebugPortService extends Service {
     }
 
     private Notification buildNotification(@Nullable Params params) {
+        NotificationManager mgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mgr.createNotificationChannel(new NotificationChannel(NOTIFICATION_CHANNEL, getString(R.string.debugport_notification_channel_name), NotificationManager.IMPORTANCE_MIN));
+        }
+
         if (params == null) {
             params = getManifestParams(this);
         }
@@ -191,6 +200,7 @@ public class DebugPortService extends Service {
         builder.setContentText(message);
         builder.addAction(mServersStarted ? buildStopAction() : buildStartAction(params));
         builder.addAction(buildKillAction());
+        builder.setChannelId(NOTIFICATION_CHANNEL);
 
         return builder.build();
     }

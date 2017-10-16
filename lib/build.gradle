@@ -13,6 +13,10 @@ android {
         versionCode 5
         versionName "2.1.0"
     }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
 }
 
 dependencies {
